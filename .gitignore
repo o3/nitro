@@ -1,0 +1,6 @@
+.stack-work/
+*~
+.idea
+*.iml
+cabal.config
+*.aes
