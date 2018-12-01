@@ -1,0 +1,70 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="Maxim Sokhatsky" />
+    <title>TYPES</title>
+    <link rel="stylesheet" href="https://synrc.space/synrc.css" />
+</head>
+
+<body>
+
+<nav>
+    <a href='https://n2o.space'>ECO</a>
+    <a href='https://o3.click'>O3</a>
+    <a href='../index.html'>NITRO</a>
+</nav>
+
+<header>
+    <a href="../index.html"><img src="https://o3.click/o3.svg"></a>
+    <h1>TYPES</h1>
+</header>
+
+<main>
+    <section>
+        <h3>INTRO</h3>
+        <p>The <b>Web.Nitro.Types</b> module contains types for events, actions and elements rendering.</p>
+    </section>
+    <section>
+        <h3>EVENT</h3>
+        <figure><figcaption>Listing 1. Nitro Event</figcaption><code>
+ data Event a = Event
+    { eventTarget   :: BS.ByteString
+    , eventPostback :: a
+    , eventType     :: BS.ByteString
+    , eventSource   :: [BS.ByteString]
+    } deriving (Show)
+        </code></figure>
+        <h4>renderEvent :: Event a -> N2O f a b BL.ByteString</h4>
+    </section>
+    <section>
+        <h3>PROTO</h3>
+        <figure><figcaption>Listing 2. Nitro Protocol</figcaption><code>
+ data Nitro a
+    = NitroInit BS.ByteString
+    | NitroPickle { pickleSource :: BS.ByteString
+                  , picklePickled :: BS.ByteString
+                  , pickleLinked :: M.Map BS.ByteString BS.ByteString }
+    | NitroDone
+      deriving (Show)
+        </code></figure>
+    </section>
+    <section>
+
+<p>This module may refer to:
+<a href="types.htm">TYPES</a></b>,
+<a href="core.htm">CORE</a></b>
+</p>
+
+    </section>
+</main>
+
+<footer>
+    Made with <span class="heart">❤</span> to Haskell and N2O
+</footer>
+
+</body>
+</html>

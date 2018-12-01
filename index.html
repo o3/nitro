@@ -1,0 +1,120 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="Maxim Sokhatsky" />
+    <title>NITRO</title>
+    <link rel="stylesheet" href="https://synrc.space/synrc.css" />
+</head>
+
+<body>
+
+<nav>
+    <a href='https://n2o.space'>ECO</a>
+    <a href='https://o3.click'>O3</a>
+</nav>
+
+<header>
+    <a href="https://o3.click"><img src="https://o3.click/o3.svg?v=1"></a>
+    <h1>NITRO</h1>
+</header>
+
+<aside>
+    <article>
+        <section>
+            <h3>SYNOPSIS</h3>
+            <div>NITRO is the N2O protocol that implements Nitrogen Web Framework API.
+            </div>
+        </section>
+        <section>
+            <a name=plugin><h3>MODULES</h3></a>
+            <div><ul>
+            <li><a href="man/types.htm">Web.Nitro.Types</a></font></li>
+            </ul></div>
+            <br/>
+            <div>
+                2018 &copy; <a href="https://github.com/o3/nitro">Marat Khafizov</a> BSD 3-clause
+            </div>
+        </section>
+        <section>
+        <figure>
+        <code>
+ git clone https://github.com/xafizoff/n2o && cd n2o
+ stack build && stack exec n2o-sample
+ open http://localhost:3000/samples/static/index.html
+        </code>
+        </figure>
+        </section>
+
+    </article>
+</aside>
+<main>
+    <section>
+
+        <h3>N2O Haskell</h3>
+
+        <p>The philosophy behind N2O is a simplicity, cleanness, and purity.
+           The core of N2O should be no more than 500 LOC.</p>
+
+        <figure>
+            <figcaption>Listing 2. N2O Context Setup</figcaption>
+        <code>
+  data Example = Greet deriving (Show, Eq, Read)
+
+  main = runServer "localhost" 3000 cx
+  cx = createCx router
+  router cx@Cx{cxReq=Req{reqPath=path}} =
+      let handler = case path of
+          "/ws/samples/static/index.html" -> index
+          "/ws/samples/static/about.html" -> about
+                                        _ -> index
+      in traceShow path cx{cxHandler=handler}
+        </code></figure>
+
+        <p>The idea to send prerendered JavaScript events over the
+           wire belongs to Rusty Klophaus who made Nitrogen Erlang web framework.
+           Later this was refined by N2O team and now is available
+           in its purity of Haskell.</p>
+
+        <figure>
+            <figcaption>Listing 3. NITRO Web Protocol</figcaption>
+        <code>
+  index Init = do
+      updateText "system" "What is your name?"
+      wireEl button{id="send", postback=Just Greet, source=["name"]}
+
+  index (Message Greet) = do
+      Just name <- get "name" -- wf:q/1
+      updateText "system" ("Hello, " <> jsEscape name <> "!")
+
+  about Init =
+      updateText "app" "This is the N2O Hello World App"
+        </code></figure>
+
+        <p>The N2O does not limit in developing only web applications.
+           N2O stack of protocols covers bus, storage, process interfaces.
+           Subscribe to follow Haskell implementations.</p>
+    </section>
+
+    <section>
+        <a name=plugin><h3>Documents</h3></a>
+        <div>
+        <ul>
+         <a href="man/web.htm">WEB</a></b>,
+         <a href="man/types.htm">TYPES</a></b>,
+         <a href="man/core.htm">CORE</a></b>,
+         <a href="man/protocols.htm">PROTOCOLS</a></b>,
+         <a href="man/nitro.htm">NITRO</a></b>.
+        </ul></div>
+    </section>
+</main>
+
+<footer>
+    Made with <span class="heart">❤</span> to Haskell and N2O
+</footer>
+
+</body>
+</html>
