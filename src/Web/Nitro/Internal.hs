@@ -27,7 +27,7 @@ wire r = do
 update :: (NITRO m, B.Serialize a) => BS.ByteString -> [Element a] -> m ()
 update target elems = do
   (content,js) <- render_ elems
-  addAction $ "(function(){qi('" <> target <> "').outerHTML='" <> content <> "';}();" <> js
+  addAction $ "(function(){qi('" <> target <> "').outerHTML='" <> content <> "';})();" <> js
 
 -- | Update text content of the element with the specified @id@
 updateText :: (NITRO m) => BS.ByteString -> T.Text -> m ()
